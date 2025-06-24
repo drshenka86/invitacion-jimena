@@ -3,21 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Primera Comunión y Cumpleaños de Jimena</title>
+    <title>Primera Comunión y Cumpleaños</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #8e6c88;
-            --secondary-color: #6b8e7a;
-            --text-color: #3a2e3a;
-            --light-bg: #f9f5f1;
-            --border-color: #f0e6d6;
-        }
-        
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--light-bg);
+            background-color: #f9f5f1;
             margin: 0;
             padding: 0;
             color: #444;
@@ -34,18 +26,12 @@
             background: white;
             box-shadow: 0 2px 15px rgba(0,0,0,0.05);
             overflow: hidden;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-        }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; }
         }
         
         .header-section {
             padding: 20px 25px 0;
             position: relative;
-            background: linear-gradient(to bottom, var(--light-bg), white 30%);
+            background: linear-gradient(to bottom, #f9f5f1, white 30%);
         }
         
         .communion-image {
@@ -58,34 +44,28 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             filter: brightness(1.05) contrast(0.95) saturate(0.9);
             border: 1px solid rgba(0,0,0,0.03);
-            transition: transform 0.5s ease;
-        }
-        
-        .communion-image:hover {
-            transform: scale(1.02);
         }
         
         .invitation-heading {
             font-size: 15px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #7a5a74;
+            color: #8e6c88;
             margin-bottom: 12px;
             font-weight: 400;
         }
         
         .event-title {
             font-family: 'Playfair Display', serif;
-            margin: 5px 0 25px;
-            color: var(--text-color);
+            margin: 5px 0 15px;
+            color: #3a2e3a;
             letter-spacing: 0.5px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
         
         .first-word {
             font-family: 'Parisienne', cursive;
             font-size: 60px;
-            color: var(--primary-color);
+            color: #8e6c88;
             display: block;
             line-height: 1;
             margin-bottom: 5px;
@@ -98,19 +78,18 @@
             font-size: 40px;
             display: block;
             margin-top: -10px;
-            color: var(--primary-color);
+            color: #8e6c88;
             font-weight: 400;
             text-transform: none;
         }
         
         .child-name {
             font-family: 'Parisienne', cursive;
-            font-size: 62px;
-            margin: 15px 0 0;
-            color: var(--primary-color);
+            font-size: 60px;
+            margin: 5px 0 0;
+            color: #8e6c88;
             font-weight: 400;
             line-height: 1;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
         }
         
         .content-section {
@@ -126,8 +105,8 @@
             letter-spacing: 0.5px;
             color: #5a4a5a;
             padding: 10px 0;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
+            border-top: 1px solid #f0e6d6;
+            border-bottom: 1px solid #f0e6d6;
             width: 100%;
             max-width: 500px;
             margin-left: auto;
@@ -149,15 +128,10 @@
             padding: 15px 0;
             background: rgba(240, 230, 214, 0.15);
             border-radius: 0;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
+            border-top: 1px solid #f0e6d6;
+            border-bottom: 1px solid #f0e6d6;
             text-align: center;
             margin: 0 auto;
-            transition: all 0.3s ease;
-        }
-        
-        .event-card:hover {
-            background: rgba(240, 230, 214, 0.25);
         }
         
         .event-info {
@@ -169,7 +143,7 @@
             font-weight: 600;
             font-size: 15px;
             margin-bottom: 6px;
-            color: var(--text-color);
+            color: #3a2e3a;
         }
         
         .event-time {
@@ -191,51 +165,29 @@
             padding: 0 15px;
         }
         
-        .map-button, .confirm-button {
+        .map-button {
             padding: 10px 18px;
+            background-color: rgba(107, 142, 122, 0.9);
             color: white;
             text-decoration: none;
             border-radius: 20px;
             font-size: 14px;
-            transition: all 0.3s ease, transform 0.2s ease;
+            transition: all 0.3s;
             font-weight: 500;
             border: none;
             cursor: pointer;
-            display: inline-block;
-            will-change: transform;
-            transform: translateY(0);
-        }
-        
-        .map-button {
-            background-color: rgba(107, 142, 122, 0.9);
             box-shadow: 0 2px 6px rgba(107, 142, 122, 0.2);
-        }
-        
-        .confirm-button {
-            background-color: rgba(142, 108, 136, 0.9);
-            padding: 12px 22px;
-            font-size: 15px;
-            margin: 10px 0 5px;
-            box-shadow: 0 2px 6px rgba(142, 108, 136, 0.2);
-        }
-        
-        .map-button:hover, .confirm-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            display: inline-block;
         }
         
         .map-button:hover {
             background-color: #5a7a66;
         }
         
-        .confirm-button:hover {
-            background-color: #7a5a74;
-        }
-        
         .section-divider {
             margin: 20px auto;
             width: 70%;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid #f0e6d6;
             position: relative;
         }
         
@@ -247,125 +199,26 @@
             transform: translateX(-50%);
             background: white;
             padding: 0 12px;
-            color: var(--primary-color);
+            color: #8e6c88;
             font-size: 15px;
         }
         
-        /* Modal de Confirmación - Estilo actualizado */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .modal-overlay.active .modal-content {
-            transform: translateY(0);
-        }
-        
-        .modal-content h3 {
-            margin-top: 0;
-            color: var(--primary-color);
-            font-family: 'Playfair Display', serif;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        #rsvp-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        #rsvp-form input {
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            background-color: var(--light-bg);
-            transition: border-color 0.3s;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        #rsvp-form input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-        
-        #rsvp-form button {
-            background-color: var(--primary-color);
+        .confirm-button {
+            background-color: rgba(142, 108, 136, 0.9);
+            padding: 12px 22px;
+            font-size: 15px;
+            margin: 10px 0 5px;
             color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s;
             font-weight: 500;
-            margin-top: 10px;
+            box-shadow: 0 2px 6px rgba(142, 108, 136, 0.2);
+            display: inline-block;
         }
         
-        #rsvp-form button:hover {
+        .confirm-button:hover {
             background-color: #7a5a74;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: #777;
-            padding: 5px;
-        }
-        
-        .guest-count {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 5px;
-        }
-        
-        .guest-type {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .guest-type label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--text-color);
-            font-weight: 500;
         }
         
         @media only screen and (max-width: 600px) {
@@ -383,7 +236,7 @@
             }
             
             .child-name {
-                font-size: 42px;
+                font-size: 40px;
             }
             
             .map-button, .confirm-button {
@@ -394,30 +247,6 @@
             .event-date,
             .event-card {
                 max-width: 100%;
-            }
-            
-            .guest-count {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-        
-        @media only screen and (max-width: 480px) {
-            .first-word {
-                font-size: 42px;
-                margin-bottom: 8px;
-            }
-            
-            .child-name {
-                font-size: 36px;
-            }
-            
-            .event-card {
-                padding: 20px 15px;
-            }
-            
-            .modal-content {
-                padding: 20px 15px;
             }
         }
     </style>
@@ -432,8 +261,7 @@
                 <span class="second-word">& mis 9 años</span>
             </div>
             
-            <img src="https://i.ibb.co/MyswS4v6/image.jpg" alt="Jimena en su Primera Comunión" class="communion-image" aria-describedby="photo-description">
-            <p id="photo-description" hidden>Jimena sonriendo con vestido blanco de primera comunión</p>
+            <img src="https://i.ibb.co/MyswS4v6/image.jpg" alt="Jimena en su Primera Comunión" class="communion-image">
             <div class="child-name">Jimena López Gaona</div>
         </div>
         
@@ -466,64 +294,9 @@
             
             <div class="section-divider"></div>
             
-            <button id="open-confirmation" class="confirm-button">Confirma asistencia</button>
+            <a href="mailto:estela.marin@ejemplo.com?subject=Confirmación de asistencia&body=Nombre(s):%0A%0ANúmero de asistentes:" 
+               class="confirm-button">Confirma asistencia</a>
         </div>
     </div>
-    
-    <!-- Modal de Confirmación - Versión actualizada -->
-    <div class="modal-overlay" id="confirmation-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h3>Confirmar Asistencia</h3>
-            <form id="rsvp-form">
-                <input type="text" placeholder="Nombre(s)" required>
-                
-                <div class="guest-count">
-                    <div class="guest-type">
-                        <label>Adultos</label>
-                        <input type="number" placeholder="0" min="0">
-                    </div>
-                    <div class="guest-type">
-                        <label>Niños</label>
-                        <input type="number" placeholder="0" min="0">
-                    </div>
-                </div>
-                
-                <button type="submit">Enviar Confirmación</button>
-            </form>
-        </div>
-    </div>
-    
-   <script>
-    document.getElementById('rsvp-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const nombre = document.getElementById('nombre').value;
-      const adultos = document.getElementById('adultos').value;
-      const ninos = document.getElementById('ninos').value;
-
-      const formData = new URLSearchParams();
-      formData.append("nombre", nombre);
-      formData.append("adultos", adultos);
-      formData.append("niños", ninos);
-
-      fetch("https://script.google.com/macros/s/AKfycbzYH28OS2kgD3CkQ5VwRAGPBJXFXVRJ0lbwZP6nx_divmhy7I2VyIIIBLyj1nrPytlj/exec", {
-        method: "POST",
-        body: formData,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
-      })
-      .then(res => res.text())
-      .then(data => {
-        alert("¡Gracias por confirmar tu asistencia!");
-        this.reset();
-      })
-      .catch(error => {
-        alert("Hubo un error al enviar tu confirmación.");
-        console.error(error);
-      });
-    });
-  </script>
 </body>
 </html>
