@@ -494,60 +494,36 @@
         </div>
     </div>
     
-    <script>
-        // Manejo del modal
-        const modal = document.getElementById('confirmation-modal');
-        const openBtn = document.getElementById('open-confirmation');
-        const closeBtn = document.querySelector('.close-modal');
+   <script>
+    document.getElementById('rsvp-form').addEventListener('submit', function (e) {
+      e.preventDefault();
 
-        openBtn.addEventListener('click', () => {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+      const nombre = document.getElementById('nombre').value;
+      const adultos = document.getElementById('adultos').value;
+      const ninos = document.getElementById('ninos').value;
 
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        });
+      const formData = new URLSearchParams();
+      formData.append("nombre", nombre);
+      formData.append("adultos", adultos);
+      formData.append("niños", ninos);
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Envío a Google Sheets
-        document.getElementById('rsvp-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const inputs = this.querySelectorAll('input');
-            const nombre = inputs[0].value;
-            const adultos = inputs[1].value || 0;
-            const niños = inputs[2].value || 0;
-
-            fetch("https://script.google.com/macros/s/AKfycbzYH28OS2kgD3CkQ5VwRAGPBJXFXVRJ0lbwZP6nx_divmhy7I2VyIIIBLyj1nrPytlj/exec", {
-                method: "POST",
-                body: JSON.stringify({
-                    nombre: nombre,
-                    adultos: adultos,
-                    niños: niños
-                }),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then(response => response.json())
-            .then(result => {
-                alert(`¡Gracias, ${nombre}!\nTu confirmación fue registrada exitosamente.\n\n• ${adultos} adulto(s)\n• ${niños} niño(s)\n\n¡Nos vemos en la celebración!`);
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-                this.reset();
-            })
-            .catch(error => {
-                alert("Hubo un error al enviar tu confirmación. Intenta nuevamente.");
-                console.error(error);
-            });
-        });
-    </script>
+      fetch("https://script.google.com/macros/s/AKfycbzYH28OS2kgD3CkQ5VwRAGPBJXFXVRJ0lbwZP6nx_divmhy7I2VyIIIBLyj1nrPytlj/exec", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      })
+      .then(res => res.text())
+      .then(data => {
+        alert("¡Gracias por confirmar tu asistencia!");
+        this.reset();
+      })
+      .catch(error => {
+        alert("Hubo un error al enviar tu confirmación.");
+        console.error(error);
+      });
+    });
+  </script>
 </body>
 </html>
