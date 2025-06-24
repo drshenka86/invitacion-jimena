@@ -107,38 +107,36 @@
             padding: 10px 0;
             border-top: 1px solid #f0e6d6;
             border-bottom: 1px solid #f0e6d6;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .event-details {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            flex-direction: column;
+            gap: 15px;
             margin: 20px 0;
-            flex-wrap: wrap;
+            align-items: center;
+            width: 100%;
         }
         
         .event-card {
-            flex: 1;
-            min-width: 200px;
-            padding: 15px;
+            width: 100%;
+            max-width: 500px;
+            padding: 15px 0;
             background: rgba(240, 230, 214, 0.15);
-            border-radius: 8px;
-            border: 1px solid rgba(142, 108, 136, 0.1);
-            position: relative;
-        }
-        
-        .event-card:first-child::after {
-            content: "";
-            position: absolute;
-            right: -10px;
-            top: 20%;
-            height: 60%;
-            width: 1px;
-            background: rgba(142, 108, 136, 0.2);
+            border-radius: 0;
+            border-top: 1px solid #f0e6d6;
+            border-bottom: 1px solid #f0e6d6;
+            text-align: center;
+            margin: 0 auto;
         }
         
         .event-info {
             margin-bottom: 10px;
+            padding: 0 15px;
         }
         
         .event-type {
@@ -163,6 +161,8 @@
         
         .button-container {
             margin-top: 12px;
+            text-align: center;
+            padding: 0 15px;
         }
         
         .map-button {
@@ -222,19 +222,6 @@
         }
         
         @media only screen and (max-width: 600px) {
-            .event-details {
-                flex-direction: column;
-                gap: 25px;
-            }
-            
-            .event-card {
-                min-width: 100%;
-            }
-            
-            .event-card:first-child::after {
-                content: none;
-            }
-            
             .communion-image {
                 width: 75%;
             }
@@ -256,6 +243,11 @@
                 padding: 9px 16px;
                 font-size: 13px;
             }
+            
+            .event-date,
+            .event-card {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -269,7 +261,7 @@
                 <span class="second-word">& mis 9 años</span>
             </div>
             
-            <img src="https://i.ibb.co/MyswS4v6/image.jpg" alt="Primera Comunión" class="communion-image">
+            <img src="https://i.ibb.co/MyswS4v6/image.jpg" alt="Jimena en su Primera Comunión" class="communion-image">
             <div class="child-name">Jimena López Gaona</div>
         </div>
         
@@ -290,7 +282,7 @@
                 
                 <div class="event-card">
                     <div class="event-info">
-                        <div class="event-type">Recepción y Fiesta</div>
+                        <div class="event-type">Recepción</div>
                         <div class="event-time">15:00 hrs</div>
                         <div class="event-location">Salón de Fiestas<br>El Arca de los Niños</div>
                     </div>
