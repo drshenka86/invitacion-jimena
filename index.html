@@ -245,6 +245,19 @@
     .submit-btn:active {
       transform: scale(0.98);
     }
+    .loading-spinner {
+      display: none;
+      width: 24px;
+      height: 24px;
+      margin: 10px auto;
+      border: 3px solid rgba(142, 108, 136, 0.3);
+      border-radius: 50%;
+      border-top-color: #8e6c88;
+      animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -272,6 +285,7 @@
         <div class="event-location">Salón de Fiestas<br>El Arca de los Niños</div>
         <button class="map-button" onclick="getLocationAndNavigate('Salón+de+Fiestas+El+Arca+de+los+Niños,+8WP9+MV,+Ciudad+de+México')">Cómo llegar</button>
       </div>
+      
       <button class="confirm-button" onclick="openModal()">Confirma asistencia</button>
     </div>
   </div>
@@ -295,6 +309,7 @@
           <input type="number" id="children" min="0" value="0" required>
         </div>
         <button type="submit" class="submit-btn">Enviar confirmación</button>
+        <div class="loading-spinner" id="loadingSpinner"></div>
       </form>
       <div id="thankYouMessage" class="success">¡Gracias por confirmar!</div>
     </div>
@@ -369,27 +384,49 @@
     
     document.getElementById('rsvpForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      
       const name = document.getElementById('name').value.trim();
       const adults = parseInt(document.getElementById('adults').value);
       const children = parseInt(document.getElementById('children').value);
+      const userAgent = navigator.userAgent;
+      const screenSize = `${window.innerWidth}x${window.innerHeight}`;
+      
+      if (name.length < 3) {
+        alert("Por favor ingresa tu nombre completo");
+        return;
+      }
       
       if (adults < 1) {
         alert("Debe haber al menos 1 adulto");
         return;
       }
       
+      if (children < 0) {
+        alert("El número de niños no puede ser negativo");
+        return;
+      }
+      
+      // Mostrar spinner de carga
+      document.getElementById('loadingSpinner').style.display = 'block';
+      
       db.collection("confirmaciones").add({
         nombre: name,
         adultos: adults,
         niños: children,
+        dispositivo: userAgent,
+        pantalla: screenSize,
+        fecha: new Date().toLocaleString('es-MX'),
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       })
       .then(() => {
         document.getElementById('rsvpForm').style.display = 'none';
         document.getElementById('thankYouMessage').style.display = 'block';
+        document.getElementById('loadingSpinner').style.display = 'none';
+        
         setTimeout(closeModal, 1500);
       })
       .catch((error) => {
+        document.getElementById('loadingSpinner').style.display = 'none';
         alert("Ocurrió un error al guardar. Intenta nuevamente.");
         console.error("Error al guardar en Firebase:", error);
       });
