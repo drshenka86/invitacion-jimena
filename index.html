@@ -2,77 +2,85 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Primera Comunión y Cumpleaños</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
   <style>
+    /* Estilos generales optimizados para iPhone */
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: #f9f5f1;
       margin: 0;
       padding: 0;
       color: #444;
+      -webkit-text-size-adjust: 100%;
     }
     .invitation-container {
       max-width: 100%;
       margin: 0 auto;
       text-align: center;
       background: white;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      min-height: 100vh;
+      position: relative;
     }
     .header-section {
-      padding: 20px 25px 0;
+      padding: 20px 15px 0;
       background: linear-gradient(to bottom, #f9f5f1, white 30%);
     }
     .communion-image {
-      width: 80%;
-      max-width: 300px;
+      width: 85%;
+      max-width: 280px;
       margin: 0 auto 15px;
       border-radius: 6px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     .invitation-heading {
-      font-size: 15px;
-      letter-spacing: 2px;
+      font-size: 14px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       color: #8e6c88;
-    }
-    .event-title {
-      font-family: 'Playfair Display', serif;
-      color: #3a2e3a;
+      margin-bottom: 5px;
     }
     .first-word {
       font-family: 'Parisienne', cursive;
-      font-size: 60px;
+      font-size: 50px;
       color: #8e6c88;
       line-height: 1;
+      display: block;
     }
     .second-word {
       font-family: 'Parisienne', cursive;
-      font-size: 40px;
+      font-size: 36px;
       color: #8e6c88;
-      margin-top: -10px;
+      margin-top: -8px;
+      display: block;
     }
     .child-name {
       font-family: 'Parisienne', cursive;
-      font-size: 60px;
+      font-size: 48px;
       color: #8e6c88;
-      margin: 5px 0;
+      margin: 5px 0 10px;
+      line-height: 1.1;
     }
     .event-date {
-      font-size: 16px;
+      font-size: 15px;
       text-transform: uppercase;
       font-weight: 500;
       color: #5a4a5a;
-      padding: 10px 0;
+      padding: 12px 0;
       border-top: 1px solid #f0e6d6;
       border-bottom: 1px solid #f0e6d6;
-      max-width: 500px;
+      max-width: 90%;
       margin: 20px auto;
+      letter-spacing: 0.5px;
     }
     .event-card {
-      max-width: 500px;
+      max-width: 90%;
       margin: 15px auto;
       padding: 15px 0;
       background: rgba(240,230,214,0.15);
@@ -81,28 +89,34 @@
     }
     .event-type {
       font-weight: 600;
-      font-size: 15px;
+      font-size: 14px;
       color: #3a2e3a;
+      margin-bottom: 3px;
     }
     .event-time {
-      font-size: 15px;
+      font-size: 14px;
       color: #5a5a5a;
+      margin-bottom: 5px;
     }
     .event-location {
       font-style: italic;
-      font-size: 14px;
+      font-size: 13px;
       color: #777;
+      margin-bottom: 12px;
+      line-height: 1.4;
     }
     .map-button, .confirm-button {
-      padding: 10px 18px;
-      border-radius: 20px;
+      padding: 12px 25px;
+      border-radius: 25px;
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
       border: none;
-      transition: 0.3s;
+      transition: all 0.3s ease;
       margin: 10px auto;
       display: inline-block;
+      width: auto;
+      min-width: 180px;
     }
     .map-button {
       background-color: rgba(107, 142, 122, 0.9);
@@ -111,7 +125,13 @@
     .confirm-button {
       background-color: rgba(142, 108, 136, 0.9);
       color: white;
+      margin-bottom: 30px;
     }
+    .map-button:active, .confirm-button:active {
+      transform: scale(0.96);
+    }
+    
+    /* Estilos del modal ultra compacto */
     .modal {
       position: fixed;
       top: 0;
@@ -123,30 +143,96 @@
       justify-content: center;
       align-items: center;
       z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal.active {
+      opacity: 1;
+      pointer-events: all;
     }
     .modal-content {
       background: white;
-      padding: 30px;
-      border-radius: 16px;
+      padding: 18px;
+      border-radius: 12px;
       width: 90%;
-      max-width: 420px;
-      box-shadow: 0 4px 25px rgba(0,0,0,0.2);
-      text-align: left;
+      max-width: 280px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
       font-family: 'Montserrat', sans-serif;
+      border-top: 3px solid #8e6c88;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
     }
-    input {
+    .modal.active .modal-content {
+      transform: translateY(0);
+    }
+    .close-modal {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 18px;
+      color: #8e6c88;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .modal-title {
+      margin-bottom: 15px;
+      font-family: 'Parisienne', cursive;
+      font-size: 22px;
+      color: #8e6c88;
+    }
+    .modal-content input {
       width: 100%;
-      padding: 10px 12px;
-      margin: 5px 0 15px;
-      border: 1px solid #ddd1c7;
-      border-radius: 8px;
+      background-color: #f9f5f1;
+      border: 1px solid #e0d5c8;
+      border-radius: 6px;
+      padding: 12px 15px;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 10px;
       font-size: 14px;
+      -webkit-appearance: none;
+    }
+    .modal-content input:focus {
+      outline: none;
+      border-color: #8e6c88;
+      box-shadow: 0 0 0 2px rgba(142, 108, 136, 0.2);
+    }
+    .modal-content input::placeholder {
+      color: #5a4a5a;
+      opacity: 0.8;
     }
     .success {
+      font-family: 'Parisienne', cursive;
+      font-size: 20px;
+      color: #8e6c88;
+      margin: 15px 0;
       text-align: center;
-      margin-top: 20px;
-      color: #4CAF50;
+      display: none;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      background-color: rgba(142, 108, 136, 0.9);
+      color: white;
       font-weight: 500;
+      margin-top: 5px;
+    }
+    .submit-btn:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
@@ -179,23 +265,18 @@
     </div>
   </div>
 
-  <!-- Modal -->
-  <div id="rsvpModal" class="modal" style="display: none;">
+  <!-- Modal ultra compacto -->
+  <div id="rsvpModal" class="modal">
     <div class="modal-content">
-      <h3 style="color:#8e6c88; font-family:'Playfair Display', serif; text-align:center;">Confirma tu asistencia</h3>
+      <button class="close-modal" onclick="closeModal()">&times;</button>
+      <div class="modal-title">Confirma tu asistencia</div>
       <form id="rsvpForm">
-        <label>Nombre(s):</label>
-        <input type="text" id="name" required>
-        <label>Número de adultos:</label>
-        <input type="number" id="adults" min="0" required>
-        <label>Número de niños:</label>
-        <input type="number" id="children" min="0" required>
-        <div style="display:flex; gap:10px; justify-content:center;">
-          <button type="submit" class="confirm-button" style="flex:1;">Enviar</button>
-          <button type="button" class="map-button" style="flex:1;" onclick="closeModal()">Cancelar</button>
-        </div>
+        <input type="text" id="name" placeholder="Nombre(s)" required>
+        <input type="number" id="adults" placeholder="Número de adultos" min="0" required>
+        <input type="number" id="children" placeholder="Número de niños" min="0" required>
+        <button type="submit" class="submit-btn">Enviar confirmación</button>
       </form>
-      <div id="thankYouMessage" class="success" style="display: none;">¡Gracias por confirmar!</div>
+      <div id="thankYouMessage" class="success">¡Gracias por confirmar!</div>
     </div>
   </div>
 
@@ -206,7 +287,7 @@
       apiKey: "AIzaSyAG1fFh_ZwN4hSYe-1v-yxqsW4WWjyjkl4",
       authDomain: "confirmaciones-jimena.firebaseapp.com",
       projectId: "confirmaciones-jimena",
-      storageBucket: "confirmaciones-jimena.firebasestorage.app",
+      storageBucket: "confirmaciones-jimena.appspot.com",
       messagingSenderId: "669569632299",
       appId: "1:669569632299:web:6d64c8d1f476582817826e",
       measurementId: "G-JY78XDX885"
@@ -215,19 +296,35 @@
     const db = firebase.firestore();
 
     function openModal() {
-      document.getElementById('rsvpModal').style.display = 'flex';
+      const modal = document.getElementById('rsvpModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
+    
     function closeModal() {
-      document.getElementById('rsvpModal').style.display = 'none';
-      document.getElementById('thankYouMessage').style.display = 'none';
-      document.getElementById('rsvpForm').style.display = 'block';
-      document.getElementById('rsvpForm').reset();
+      const modal = document.getElementById('rsvpModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      setTimeout(() => {
+        document.getElementById('thankYouMessage').style.display = 'none';
+        document.getElementById('rsvpForm').style.display = 'block';
+        document.getElementById('rsvpForm').reset();
+      }, 300);
     }
+    
+    // Cerrar al hacer clic fuera del modal
+    document.getElementById('rsvpModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+    
     document.getElementById('rsvpForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const adults = parseInt(document.getElementById('adults').value);
       const children = parseInt(document.getElementById('children').value);
+      
       db.collection("confirmaciones").add({
         nombre: name,
         adultos: adults,
@@ -237,12 +334,20 @@
       .then(() => {
         document.getElementById('rsvpForm').style.display = 'none';
         document.getElementById('thankYouMessage').style.display = 'block';
+        setTimeout(closeModal, 1500);
       })
       .catch((error) => {
         alert("Ocurrió un error al guardar. Intenta nuevamente.");
         console.error("Error al guardar en Firebase:", error);
       });
     });
+    
+    // Evitar zoom en inputs en iOS
+    document.addEventListener('touchstart', function(e) {
+      if (e.target.tagName === 'INPUT') {
+        e.preventDefault();
+      }
+    }, { passive: false });
   </script>
 </body>
 </html>
