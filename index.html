@@ -330,7 +330,6 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Función para obtener ubicación y navegar
     function getLocationAndNavigate(destination) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -342,7 +341,6 @@
           },
           (error) => {
             console.error("Error obteniendo ubicación:", error);
-            // Si falla la geolocalización, abrir mapa normal
             window.open(`https://www.google.com/maps/search/?api=1&query=${destination}`, '_blank');
           },
           {
@@ -352,7 +350,6 @@
           }
         );
       } else {
-        // Navegador no soporta geolocalización
         window.open(`https://www.google.com/maps/search/?api=1&query=${destination}`, '_blank');
       }
     }
@@ -406,7 +403,6 @@
         return;
       }
       
-      // Mostrar spinner de carga
       document.getElementById('loadingSpinner').style.display = 'block';
       
       db.collection("confirmaciones").add({
@@ -431,12 +427,21 @@
         console.error("Error al guardar en Firebase:", error);
       });
     });
-    
-    document.addEventListener('touchstart', function(e) {
-      if (e.target.tagName === 'INPUT') {
-        e.preventDefault();
-      }
-    }, { passive: false });
+
+    // Mejora para la experiencia táctil en inputs
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputs = document.querySelectorAll('input');
+      inputs.forEach(input => {
+        input.addEventListener('touchstart', function(e) {
+          e.stopPropagation();
+        }, { passive: true });
+        
+        // Opcional: mejorar el enfoque en móviles
+        input.addEventListener('focus', function() {
+          this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+    });
   </script>
 </body>
 </html>
