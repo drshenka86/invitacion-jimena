@@ -17,7 +17,6 @@
       --color-boton: #4a64a6;
       --color-boton-hover: #0a2d6b;
 
-      /* Variables para modo oscuro */
       --bg: var(--color-fondo);
       --text: var(--color-texto);
       --card-bg: white;
@@ -243,15 +242,7 @@
           <div class="stat-number" id="totalConfirmaciones">0</div>
         </div>
         <div class="stat-box">
-          <h2>Adultos</h2>
-          <div class="stat-number" id="totalAdultos">0</div>
-        </div>
-        <div class="stat-box">
-          <h2>Niños</h2>
-          <div class="stat-number" id="totalNinos">0</div>
-        </div>
-        <div class="stat-box">
-          <h2>Total Personas</h2>
+          <h2>Personas</h2>
           <div class="stat-number" id="totalPersonas">0</div>
         </div>
       </div>
@@ -289,33 +280,26 @@
       return timestamp.toDate().toLocaleDateString('es-MX');
     }
 
-    function calcularTotalPersona(a = 0, n = 0) {
-      return a + n;
-    }
-
     function renderLista(filtrados) {
       const list = document.getElementById("confirmacionesList");
       const loading = document.getElementById("loading");
 
       list.innerHTML = '';
-      let total = 0, adultos = 0, niños = 0;
+      let total = 0, personas = 0;
 
       filtrados.forEach(data => {
-        const totalPersona = calcularTotalPersona(data.adultos, data.niños);
         total++;
-        adultos += data.adultos;
-        niños += data.niños;
+        personas += data.personas;
 
         const item = document.createElement("div");
         item.className = "confirmation-item";
         item.innerHTML = `
           <div>
             <div class="confirmation-name">${data.nombre}</div>
-            <div class="confirmation-total">Total: ${totalPersona}</div>
+            <div class="confirmation-total">Total: ${data.personas}</div>
           </div>
           <div class="confirmation-details">
-            <div>Adultos: <b>${data.adultos}</b></div>
-            <div>Niños: <b>${data.niños}</b></div>
+            <div>Personas: <b>${data.personas}</b></div>
             <div>${formatFecha(data.timestamp)}</div>
           </div>
         `;
@@ -323,9 +307,7 @@
       });
 
       document.getElementById("totalConfirmaciones").textContent = total;
-      document.getElementById("totalAdultos").textContent = adultos;
-      document.getElementById("totalNinos").textContent = niños;
-      document.getElementById("totalPersonas").textContent = adultos + niños;
+      document.getElementById("totalPersonas").textContent = personas;
       loading.style.display = "none";
     }
 
@@ -345,8 +327,8 @@
     });
 
     function exportarCSV() {
-      const encabezado = "Nombre,Adultos,Niños,Fecha\n";
-      const filas = datosOriginales.map(d => `${d.nombre},${d.adultos},${d.niños},${formatFecha(d.timestamp)}`).join("\n");
+      const encabezado = "Nombre,Personas,Fecha\n";
+      const filas = datosOriginales.map(d => `${d.nombre},${d.personas},${formatFecha(d.timestamp)}`).join("\n");
       const blob = new Blob([encabezado + filas], { type: "text/csv" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
