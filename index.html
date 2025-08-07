@@ -39,6 +39,7 @@
       max-width: 100%;
       margin: 0 auto;
       padding: 15px;
+      padding-bottom: 50px;
     }
 
     h1 {
@@ -88,6 +89,7 @@
       display: flex;
       justify-content: space-between;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .stat-box {
@@ -97,6 +99,7 @@
       border-radius: 12px;
       text-align: center;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      min-width: 120px;
     }
 
     .stat-box h2 {
@@ -163,6 +166,15 @@
       border-radius: 6px;
       cursor: pointer;
     }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 12px;
+      color: var(--text);
+      border-top: 1px solid var(--light-border);
+      background-color: var(--bg);
+    }
   </style>
 </head>
 <body>
@@ -189,6 +201,10 @@
           <h2>Niños</h2>
           <div class="stat-number" id="totalNinos">0</div>
         </div>
+        <div class="stat-box">
+          <h2>Total Personas</h2>
+          <div class="stat-number" id="totalPersonas">0</div>
+        </div>
       </div>
     </div>
 
@@ -198,6 +214,10 @@
       <div id="confirmacionesList"></div>
     </div>
   </div>
+
+  <footer>
+    Versión: <strong>v1.0.0</strong> — Publicado el <span id="fechaPublicacion"></span>
+  </footer>
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -256,6 +276,7 @@
       document.getElementById("totalConfirmaciones").textContent = total;
       document.getElementById("totalAdultos").textContent = adultos;
       document.getElementById("totalNinos").textContent = niños;
+      document.getElementById("totalPersonas").textContent = adultos + niños;
       loading.style.display = "none";
     }
 
@@ -290,7 +311,16 @@
       document.body.classList.toggle('dark');
     }
 
-    document.addEventListener("DOMContentLoaded", cargarConfirmaciones);
+    function mostrarFechaPublicacion() {
+      const hoy = new Date();
+      const opciones = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      document.getElementById("fechaPublicacion").textContent = hoy.toLocaleDateString('es-MX', opciones);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      cargarConfirmaciones();
+      mostrarFechaPublicacion();
+    });
   </script>
 </body>
 </html>
