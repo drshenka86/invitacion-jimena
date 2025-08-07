@@ -6,291 +6,262 @@
   <title>Confirmaciones de Asistencia</title>
   <style>
     :root {
-      --bg: #f9f9f9;
-      --text: #333;
-      --card-bg: #fff;
-      --primary: #8e6c88;
-      --light-border: #f0f0f0;
+      color-scheme: light dark;
     }
-
-    body.dark {
-      --bg: #1c1c1e;
-      --text: #e5e5e7;
-      --card-bg: #2c2c2e;
-      --primary: #d0a8cb;
-      --light-border: #3a3a3c;
-    }
-
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
-
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: var(--bg);
-      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: #f0f0f0;
+      color: #333;
+      padding: 1rem;
+      transition: background 0.3s, color 0.3s;
     }
-
-    .container {
-      width: 100%;
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 15px;
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #121212;
+        color: #f0f0f0;
+      }
+      .stat-box {
+        background: #1e1e1e;
+      }
+      .card {
+        background: #1c1c1c;
+      }
     }
-
     h1 {
-      color: var(--primary);
       text-align: center;
-      margin: 15px 0 20px;
-      font-size: 22px;
-      font-weight: 600;
+      margin-bottom: 1rem;
     }
-
-    .actions {
+    .controls {
       display: flex;
-      gap: 10px;
+      justify-content: center;
+      gap: 0.5rem;
       flex-wrap: wrap;
-      margin-bottom: 15px;
+      margin-bottom: 1rem;
     }
-
-    .actions input,
-    .actions button {
-      flex: 1;
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 6px;
-      border: 1px solid var(--light-border);
-    }
-
-    .actions button {
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .actions button:active {
-      opacity: 0.8;
-      transform: scale(0.98);
-    }
-
-    .stats-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
     .stat-row {
       display: flex;
-      justify-content: space-between;
-      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
-
     .stat-box {
-      flex: 1;
-      background: var(--card-bg);
-      padding: 15px;
-      border-radius: 12px;
+      background: #fff;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 180px;
       text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-
-    .stat-box h2 {
-      margin: 0 0 5px 0;
-      font-size: 14px;
-      color: var(--text);
-      font-weight: 500;
-    }
-
     .stat-number {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--primary);
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-top: 0.25rem;
     }
-
-    .confirmations-list {
-      background: var(--card-bg);
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      overflow: hidden;
+    .search-input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 1rem;
+      display: block;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
     }
-
-    .confirmation-header {
-      padding: 15px;
-      background-color: var(--primary);
-      color: white;
-      font-weight: 500;
-      font-size: 16px;
-    }
-
-    .confirmation-item {
-      padding: 15px;
-      border-bottom: 1px solid var(--light-border);
+    .list-container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 0.75rem;
     }
-
-    .confirmation-name {
-      font-weight: 500;
-      font-size: 16px;
+    .card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
     }
-
-    .confirmation-details {
-      text-align: right;
-      font-size: 14px;
+    .card:hover {
+      transform: scale(1.01);
     }
-
-    .loading {
+    .error {
+      color: red;
       text-align: center;
-      padding: 20px;
-      color: #888;
-      font-style: italic;
+      margin-bottom: 1rem;
     }
-
-    .toggle-dark {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: none;
-      border: 1px solid var(--light-border);
-      color: var(--text);
-      padding: 8px 12px;
-      border-radius: 6px;
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      text-align: center;
+      color: #888;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #007bff;
+      color: #fff;
+      border-radius: 0.5rem;
       cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0056b3;
     }
   </style>
 </head>
 <body>
-  <button class="toggle-dark" onclick="toggleDarkMode()">🌙</button>
-  <div class="container">
-    <h1>Confirmaciones de Asistencia</h1>
+  <h1>Confirmaciones de Asistencia</h1>
 
-    <div class="actions">
-      <input type="text" id="searchInput" placeholder="Buscar por nombre..." />
-      <button onclick="exportarCSV()">Exportar CSV</button>
+  <div class="controls">
+    <button onclick="cargarConfirmaciones()">Actualizar</button>
+    <button onclick="exportarCSV()">Exportar CSV</button>
+    <button onclick="exportarExcel()">Exportar Excel</button>
+  </div>
+
+  <input type="text" class="search-input" id="busqueda" placeholder="Buscar por nombre..." oninput="filtrarPorNombre()" />
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <h2>Total Confirmados</h2>
+      <div class="stat-number" id="totalConfirmaciones">0</div>
     </div>
-
-    <div class="stats-container">
-      <div class="stat-row">
-        <div class="stat-box">
-          <h2>Total Confirmados</h2>
-          <div class="stat-number" id="totalConfirmaciones">0</div>
-        </div>
-        <div class="stat-box">
-          <h2>Adultos</h2>
-          <div class="stat-number" id="totalAdultos">0</div>
-        </div>
-        <div class="stat-box">
-          <h2>Niños</h2>
-          <div class="stat-number" id="totalNinos">0</div>
-        </div>
-      </div>
+    <div class="stat-box">
+      <h2>Adultos</h2>
+      <div class="stat-number" id="totalAdultos">0</div>
     </div>
-
-    <div class="confirmations-list">
-      <div class="confirmation-header">Lista de Confirmaciones</div>
-      <div id="loading" class="loading">Cargando datos...</div>
-      <div id="confirmacionesList"></div>
+    <div class="stat-box">
+      <h2>Niños</h2>
+      <div class="stat-number" id="totalNinos">0</div>
+    </div>
+    <div class="stat-box">
+      <h2>Total Personas</h2>
+      <div class="stat-number" id="totalPersonas">0</div>
     </div>
   </div>
 
-  <!-- Firebase SDK -->
+  <div class="error" id="mensajeError"></div>
+
+  <div class="list-container" id="listaConfirmaciones"></div>
+
+  <footer>
+    Publicado el: <span id="fechaPublicacion"></span>
+  </footer>
+
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
   <script>
     const firebaseConfig = {
-      apiKey: "AIzaSyAG1fFh_ZwN4hSYe-1v-yxqsW4WWjyjkl4",
-      authDomain: "confirmaciones-jimena.firebaseapp.com",
-      projectId: "confirmaciones-jimena",
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_AUTH_DOMAIN",
+      projectId: "TU_PROJECT_ID",
     };
-
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    let datosOriginales = [];
-
-    function formatFecha(timestamp) {
-      if (!timestamp) return 'Sin fecha';
-      return timestamp.toDate().toLocaleDateString('es-MX');
-    }
-
-    function calcularTotalPersona(a = 0, n = 0) {
-      return a + n;
-    }
-
-    function renderLista(filtrados) {
-      const list = document.getElementById("confirmacionesList");
-      const loading = document.getElementById("loading");
-
-      list.innerHTML = '';
-      let total = 0, adultos = 0, niños = 0;
-
-      filtrados.forEach(data => {
-        const totalPersona = calcularTotalPersona(data.adultos, data.niños);
-        total++;
-        adultos += data.adultos;
-        niños += data.niños;
-
-        const item = document.createElement("div");
-        item.className = "confirmation-item";
-        item.innerHTML = `
-          <div>
-            <div class="confirmation-name">${data.nombre}</div>
-            <div class="confirmation-total">Total: ${totalPersona}</div>
-          </div>
-          <div class="confirmation-details">
-            <div>Adultos: <b>${data.adultos}</b></div>
-            <div>Niños: <b>${data.niños}</b></div>
-            <div>${formatFecha(data.timestamp)}</div>
-          </div>
-        `;
-        list.appendChild(item);
-      });
-
-      document.getElementById("totalConfirmaciones").textContent = total;
-      document.getElementById("totalAdultos").textContent = adultos;
-      document.getElementById("totalNinos").textContent = niños;
-      loading.style.display = "none";
-    }
+    let datosConfirmaciones = [];
 
     function cargarConfirmaciones() {
+      const lista = document.getElementById("listaConfirmaciones");
+      const error = document.getElementById("mensajeError");
+      lista.innerHTML = "";
+      error.textContent = "";
+
       db.collection("confirmaciones").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-        datosOriginales = snapshot.docs.map(doc => doc.data());
-        renderLista(datosOriginales);
+        datosConfirmaciones = [];
+        let totalAdultos = 0, totalNinos = 0;
+
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const nombre = data.nombre || "Sin nombre";
+          const adultos = parseInt(data.adultos) || 0;
+          const ninos = parseInt(data.ninos) || 0;
+          const fecha = data.timestamp?.toDate().toLocaleString() || "";
+
+          datosConfirmaciones.push({ nombre, adultos, ninos, fecha });
+
+          totalAdultos += adultos;
+          totalNinos += ninos;
+        });
+
+        document.getElementById("totalConfirmaciones").textContent = datosConfirmaciones.length;
+        document.getElementById("totalAdultos").textContent = totalAdultos;
+        document.getElementById("totalNinos").textContent = totalNinos;
+        document.getElementById("totalPersonas").textContent = totalAdultos + totalNinos;
+
+        mostrarConfirmaciones(datosConfirmaciones);
       }, err => {
-        document.getElementById("loading").textContent = "Error al cargar datos: " + err.message;
+        error.textContent = "Error al cargar datos.";
+        console.error(err);
       });
     }
 
-    document.getElementById("searchInput").addEventListener("input", e => {
-      const texto = e.target.value.toLowerCase().trim();
-      const filtrados = datosOriginales.filter(d => d.nombre.toLowerCase().includes(texto));
-      renderLista(filtrados);
-    });
+    function mostrarConfirmaciones(datos) {
+      const lista = document.getElementById("listaConfirmaciones");
+      lista.innerHTML = "";
+
+      datos.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+          <strong>${item.nombre}</strong><br/>
+          Adultos: ${item.adultos} | Niños: ${item.ninos} <br/>
+          Total: ${item.adultos + item.ninos} <br/>
+          <small>${item.fecha}</small>
+        `;
+        lista.appendChild(div);
+      });
+    }
+
+    function filtrarPorNombre() {
+      const texto = document.getElementById("busqueda").value.toLowerCase();
+      const filtrado = datosConfirmaciones.filter(item => item.nombre.toLowerCase().includes(texto));
+      mostrarConfirmaciones(filtrado);
+    }
 
     function exportarCSV() {
-      const encabezado = "Nombre,Adultos,Niños,Fecha\n";
-      const filas = datosOriginales.map(d => `${d.nombre},${d.adultos},${d.niños},${formatFecha(d.timestamp)}`).join("\n");
-      const blob = new Blob([encabezado + filas], { type: "text/csv" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "confirmaciones.csv";
-      a.click();
-      URL.revokeObjectURL(url);
+      let csv = "Nombre,Adultos,Niños,Total,Fecha\n";
+      datosConfirmaciones.forEach(item => {
+        csv += `${item.nombre},${item.adultos},${item.ninos},${item.adultos + item.ninos},"${item.fecha}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "confirmaciones.csv";
+      link.click();
     }
 
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
+    function exportarExcel() {
+      const ws = XLSX.utils.json_to_sheet(datosConfirmaciones.map(item => ({
+        Nombre: item.nombre,
+        Adultos: item.adultos,
+        Niños: item.ninos,
+        Total: item.adultos + item.ninos,
+        Fecha: item.fecha
+      })));
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Confirmaciones");
+      XLSX.writeFile(wb, "confirmaciones.xlsx");
     }
 
-    document.addEventListener("DOMContentLoaded", cargarConfirmaciones);
+    function cargarFechaPublicacion() {
+      const el = document.getElementById("fechaPublicacion");
+      const hoy = new Date();
+      const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+      el.textContent = hoy.toLocaleDateString('es-MX', opciones);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      cargarConfirmaciones();
+      cargarFechaPublicacion();
+    });
   </script>
 </body>
 </html>
