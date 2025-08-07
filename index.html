@@ -6,19 +6,37 @@
   <title>Confirmaciones de Asistencia</title>
   <style>
     :root {
-      --bg: #f9f9f9;
-      --text: #333;
-      --card-bg: #fff;
-      --primary: #8e6c88;
-      --light-border: #f0f0f0;
+      --color-primario: #5c2a57;
+      --color-secundario: #a67ea7;
+      --color-terciario: #e5d0e6;
+      --color-fondo: #faf8fc;
+      --color-texto: #3a1f3c;
+      --color-texto-claro: #8f7a93;
+      --color-borde: #d9cce0;
+      --color-sombra: rgba(92, 42, 87, 0.1);
+      --color-boton: #7a4a85;
+      --color-boton-hover: #5c2a57;
+
+      /* Variables para modo oscuro */
+      --bg: var(--color-fondo);
+      --text: var(--color-texto);
+      --card-bg: white;
+      --primary: var(--color-primario);
+      --light-border: var(--color-borde);
+      --shadow: var(--color-sombra);
+      --button-bg: var(--color-boton);
+      --button-bg-hover: var(--color-boton-hover);
     }
 
     body.dark {
-      --bg: #1c1c1e;
-      --text: #e5e5e7;
-      --card-bg: #2c2c2e;
-      --primary: #d0a8cb;
-      --light-border: #3a3a3c;
+      --bg: #2c2433;
+      --text: #e5d0e6;
+      --card-bg: #3a2f45;
+      --primary: var(--color-secundario);
+      --light-border: #5c4a69;
+      --shadow: rgba(166, 126, 167, 0.3);
+      --button-bg: var(--color-secundario);
+      --button-bg-hover: var(--color-primario);
     }
 
     * {
@@ -32,6 +50,7 @@
       padding: 0;
       background-color: var(--bg);
       color: var(--text);
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .container {
@@ -48,6 +67,7 @@
       margin: 15px 0 20px;
       font-size: 22px;
       font-weight: 600;
+      transition: color 0.3s ease;
     }
 
     .actions {
@@ -64,13 +84,28 @@
       font-size: 14px;
       border-radius: 6px;
       border: 1px solid var(--light-border);
+      transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .actions input {
+      color: var(--text);
+      background-color: var(--card-bg);
+    }
+
+    .actions input::placeholder {
+      color: var(--color-texto-claro);
     }
 
     .actions button {
-      background-color: var(--primary);
+      background-color: var(--button-bg);
       color: white;
       border: none;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .actions button:hover {
+      background-color: var(--button-bg-hover);
     }
 
     .actions button:active {
@@ -98,8 +133,9 @@
       padding: 15px;
       border-radius: 12px;
       text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px var(--shadow);
       min-width: 120px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .stat-box h2 {
@@ -107,19 +143,22 @@
       font-size: 14px;
       color: var(--text);
       font-weight: 500;
+      transition: color 0.3s ease;
     }
 
     .stat-number {
       font-size: 20px;
       font-weight: 600;
       color: var(--primary);
+      transition: color 0.3s ease;
     }
 
     .confirmations-list {
       background: var(--card-bg);
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px var(--shadow);
       overflow: hidden;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .confirmation-header {
@@ -128,6 +167,7 @@
       color: white;
       font-weight: 500;
       font-size: 16px;
+      transition: background-color 0.3s ease;
     }
 
     .confirmation-item {
@@ -136,6 +176,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color: var(--text);
+      transition: color 0.3s ease;
     }
 
     .confirmation-name {
@@ -151,7 +193,7 @@
     .loading {
       text-align: center;
       padding: 20px;
-      color: #888;
+      color: var(--color-texto-claro);
       font-style: italic;
     }
 
@@ -165,6 +207,12 @@
       padding: 8px 12px;
       border-radius: 6px;
       cursor: pointer;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .toggle-dark:hover {
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
     footer {
@@ -174,6 +222,7 @@
       color: var(--text);
       border-top: 1px solid var(--light-border);
       background-color: var(--bg);
+      transition: color 0.3s ease, background-color 0.3s ease;
     }
   </style>
 </head>
