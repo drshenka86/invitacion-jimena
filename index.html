@@ -5,246 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Confirmaciones de Asistencia — Julianchis y Elías FEST</title>
 
-  <!-- Fonts (mismo set que invitación) -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --color-primario: #000000;       /* negro Batman */
-      --color-secundario: #ffce00;     /* amarillo dorado */
-      --color-terciario: #1a1a1a;      /* gris oscuro */
-      --color-fondo: #0d0d0d;          /* fondo casi negro */
+      --color-primario: #000000;
+      --color-secundario: #ffce00;
+      --color-fondo: #0d0d0d;
       --color-texto: #f1f1f1;
       --color-texto-claro: #c9c9c9;
       --color-borde: #2a2a2a;
       --color-sombra: rgba(255,206,0,0.12);
       --color-boton: #ffce00;
       --color-boton-hover: #e0b800;
-
       --card-bg: #0d0d0d;
-      --muted-bg: #111;
     }
-
-    /* Light variant for users who toggle */
-    body.light {
-      --color-fondo: #f7f7f7;
-      --color-texto: #111;
-      --card-bg: #ffffff;
-      --muted-bg: #fbfbfb;
-      --color-borde: #e6e6e6;
-      --color-sombra: rgba(0,0,0,0.06);
-    }
-
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(circle at top left, #1a1a1a 0%, #000 100%);
-      color:var(--color-texto);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      min-height:100vh;
-      padding-bottom:40px;
-    }
-
-    body.light {
-      background: #f3f3f3;
-      color: var(--color-texto);
-    }
-
-    .container {
-      max-width:1000px;
-      margin:22px auto;
-      padding:18px;
-    }
-
-    header.app-header{
-      display:flex;
-      gap:16px;
-      align-items:center;
-      margin-bottom:18px;
-    }
-
-    .logo-img{
-      width:72px;
-      height:72px;
-      object-fit:cover;
-      border-radius:10px;
-      border:2px solid var(--color-secundario);
-      box-shadow:0 6px 18px var(--color-sombra);
-    }
-
-    h1 {
-      font-size:20px;
-      margin:0;
-      color:var(--color-secundario);
-      font-weight:600;
-    }
-
-    .controls {
-      display:flex;
-      gap:10px;
-      margin:14px 0;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    .search {
-      flex:1;
-      min-width:180px;
-      background:var(--card-bg);
-      border:1px solid var(--color-borde);
-      padding:10px 12px;
-      border-radius:12px;
-      color:var(--color-texto);
-    }
-
-    .btn {
-      background:var(--color-boton);
-      color:#000;
-      border:none;
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:600;
-      cursor:pointer;
-      box-shadow:0 6px 14px var(--color-sombra);
-      text-transform:uppercase;
-      letter-spacing:0.6px;
-    }
-    .btn:hover{ background:var(--color-boton-hover); transform:scale(1.02) }
-
-    .stats {
-      display:flex;
-      gap:12px;
-      margin-bottom:14px;
-      flex-wrap:wrap;
-    }
-
-    .stat-card {
-      background:var(--card-bg);
-      border-radius:12px;
-      padding:14px;
-      box-shadow:0 6px 18px var(--color-sombra);
-      border:1px solid var(--color-borde);
-      min-width:140px;
-      flex:1;
-    }
-    .stat-title { font-size:13px; color:var(--color-texto-claro); margin:0 0 6px 0; }
-    .stat-value { font-size:20px; color:var(--color-secundario); font-weight:700; }
-
-    .list-card {
-      background:var(--card-bg);
-      border-radius:12px;
-      overflow:hidden;
-      border:1px solid var(--color-borde);
-      box-shadow:0 6px 18px var(--color-sombra);
-    }
-
-    .list-header {
-      background: linear-gradient(90deg, rgba(0,0,0,0.45), rgba(26,26,26,0.6));
-      color: var(--color-secundario);
-      padding:12px 16px;
-      font-weight:700;
-      letter-spacing:0.6px;
-    }
-
-    #confirmacionesList {
-      padding:12px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      max-height:60vh;
-      overflow:auto;
-    }
-
-    .confirm-item {
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:12px;
-      border-radius:10px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
-      border:1px solid transparent;
-    }
-
-    .avatar {
-      width:56px;
-      height:56px;
-      border-radius:10px;
-      background:linear-gradient(180deg,#111,#0d0d0d);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      color:var(--color-secundario);
-      border:2px solid rgba(255,206,0,0.12);
-      flex-shrink:0;
-    }
-
-    .info {
-      flex:1;
-      min-width:0;
-    }
-
-    .name {
-      font-size:16px;
-      font-weight:600;
-      color:var(--color-texto);
-      margin-bottom:4px;
-    }
-
-    .meta {
-      font-size:13px;
-      color:var(--color-texto-claro);
-      line-height:1.2;
-    }
-
-    .right {
-      text-align:right;
-      min-width:120px;
-    }
-
-    .right .people {
-      font-weight:700;
-      color:var(--color-secundario);
-      font-size:16px;
-    }
-
-    .empty {
-      padding:20px;
-      text-align:center;
-      color:var(--color-texto-claro);
-      font-style:italic;
-    }
-
-    .loading {
-      padding:18px;
-      text-align:center;
-      color:var(--color-texto-claro);
-      font-style:italic;
-    }
-
-    .toggle-dark {
-      background:transparent;
-      border:1px solid var(--color-borde);
-      color:var(--color-texto);
-      padding:8px 10px;
-      border-radius:10px;
-      cursor:pointer;
-    }
-
-    footer {
-      text-align:center;
-      margin-top:18px;
-      color:var(--color-texto-claro);
-      font-size:13px;
-    }
-
-    /* responsive */
-    @media (max-width:640px) {
-      .right { min-width:90px; font-size:13px }
-      .avatar { width:48px; height:48px }
-    }
+    body{margin:0;font-family:'Montserrat',sans-serif;background:radial-gradient(circle at top left,#1a1a1a 0%,#000 100%);color:var(--color-texto);min-height:100vh;padding-bottom:40px}
+    .container{max-width:1000px;margin:22px auto;padding:18px}
+    header.app-header{display:flex;gap:16px;align-items:center;margin-bottom:18px}
+    .logo-img{width:72px;height:72px;object-fit:cover;border-radius:10px;border:2px solid var(--color-secundario);box-shadow:0 6px 18px var(--color-sombra)}
+    h1{font-size:20px;margin:0;color:var(--color-secundario);font-weight:600}
+    .controls{display:flex;gap:10px;margin:14px 0;flex-wrap:wrap;align-items:center}
+    .search{flex:1;min-width:180px;background:var(--card-bg);border:1px solid var(--color-borde);padding:10px 12px;border-radius:12px;color:var(--color-texto)}
+    .btn{background:var(--color-boton);color:#000;border:none;padding:10px 14px;border-radius:999px;font-weight:600;cursor:pointer;box-shadow:0 6px 14px var(--color-sombra);text-transform:uppercase;letter-spacing:0.6px}
+    .btn:hover{background:var(--color-boton-hover);transform:scale(1.02)}
+    .stats{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+    .stat-card{background:var(--card-bg);border-radius:12px;padding:14px;box-shadow:0 6px 18px var(--color-sombra);border:1px solid var(--color-borde);min-width:140px;flex:1}
+    .stat-title{font-size:13px;color:var(--color-texto-claro);margin:0 0 6px 0}
+    .stat-value{font-size:20px;color:var(--color-secundario);font-weight:700}
+    .list-card{background:var(--card-bg);border-radius:12px;overflow:hidden;border:1px solid var(--color-borde);box-shadow:0 6px 18px var(--color-sombra)}
+    .list-header{background:linear-gradient(90deg,rgba(0,0,0,0.45),rgba(26,26,26,0.6));color:var(--color-secundario);padding:12px 16px;font-weight:700;letter-spacing:0.6px}
+    #confirmacionesList{padding:12px;display:flex;flex-direction:column;gap:10px;max-height:60vh;overflow:auto}
+    .confirm-item{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.00));border:1px solid transparent}
+    .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,#111,#0d0d0d);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--color-secundario);border:2px solid rgba(255,206,0,0.12);flex-shrink:0}
+    .info{flex:1;min-width:0}
+    .name{font-size:16px;font-weight:600;color:var(--color-texto);margin-bottom:4px}
+    .meta{font-size:13px;color:var(--color-texto-claro);line-height:1.2}
+    .right{text-align:right;min-width:120px}
+    .right .people{font-weight:700;color:var(--color-secundario);font-size:16px}
+    .empty{padding:20px;text-align:center;color:var(--color-texto-claro);font-style:italic}
+    .loading{padding:18px;text-align:center;color:var(--color-texto-claro);font-style:italic}
+    .pagination{display:flex;gap:8px;align-items:center;margin-top:12px;justify-content:center}
+    .page-info{color:var(--color-texto-claro);font-size:13px}
+    .small-btn{padding:6px 10px;border-radius:8px;background:transparent;border:1px solid var(--color-borde);color:var(--color-texto);cursor:pointer}
+    .toggle-dark{background:transparent;border:1px solid var(--color-borde);color:var(--color-texto);padding:8px 10px;border-radius:10px;cursor:pointer}
+    footer{text-align:center;margin-top:18px;color:var(--color-texto-claro);font-size:13px}
+    @media(max-width:640px){.right{min-width:90px;font-size:13px}.avatar{width:48px;height:48px}}
   </style>
 </head>
 <body>
@@ -253,7 +60,7 @@
       <img class="logo-img" src="https://i.ibb.co/wFVHyPtL/04476d50-b059-4919-b8dc-81ac6d097f40.jpg" alt="Logo evento" />
       <div>
         <h1>Confirmaciones — Julianchis y Elías FEST</h1>
-        <div style="font-size:13px;color:var(--color-texto-claro)">Panel en tiempo real — Actualiza según confirmaciones</div>
+        <div style="font-size:13px;color:var(--color-texto-claro)">Panel paginado — Carga por páginas</div>
       </div>
       <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
         <button class="toggle-dark" id="toggleTheme" title="Cambiar tema">🌗</button>
@@ -272,7 +79,6 @@
         <div class="stat-value" id="totalConfirmaciones">0</div>
       </div>
 
-      <!-- NUEVAS TARJETAS -->
       <div class="stat-card">
         <div class="stat-title">Adultos Totales</div>
         <div class="stat-value" id="totalAdultos">0</div>
@@ -281,7 +87,6 @@
         <div class="stat-title">Niños Totales</div>
         <div class="stat-value" id="totalNinos">0</div>
       </div>
-      <!-- /NUEVAS TARJETAS -->
 
       <div class="stat-card">
         <div class="stat-title">Total Personas</div>
@@ -299,20 +104,26 @@
       <div id="confirmationsArea">
         <div id="loading" class="loading">Cargando datos...</div>
         <div id="confirmacionesList" aria-live="polite" role="list"></div>
+
+        <!-- Controles de paginación -->
+        <div class="pagination" aria-label="Paginación">
+          <button id="prevPage" class="small-btn" disabled>Anterior</button>
+          <div class="page-info">Página <span id="pageNumber">1</span></div>
+          <button id="nextPage" class="small-btn" disabled>Siguiente</button>
+        </div>
       </div>
     </section>
 
     <footer>
-      Versión <strong>1.0.0</strong> — <time id="fechaPublicacion"></time>
+      Versión <strong>1.0.10</strong> — <time id="fechaPublicacion"></time>
     </footer>
   </div>
 
-  <!-- Firebase compat (igual que en la invitación) -->
+  <!-- Firebase compat -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
   <script>
-    // Configuración firebase (usa la tuya)
     const firebaseConfig = {
       apiKey: "AIzaSyAG1fFh_ZwN4hSYe-1v-yxqsW4WWjyjkl4",
       authDomain: "confirmaciones-jimena.firebaseapp.com",
@@ -321,70 +132,52 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Estado local
-    let datosOriginales = [];
-    let unsubscribe = null;
+    // Paginación
+    const pageSize = 10;            // items por página
+    let currentPage = 1;
+    let firstDoc = null;
+    let lastDoc = null;
+    let allCountCache = null;       // opcional: cache del total (si quieres)
+    let currentItems = [];          // elementos de la página actual
 
-    // Util: calcular adultos/ninos/total por registro
+    let datosOriginales = []; // usado por búsqueda si decides cargar todo (no usado para paginación por defecto)
+
+    // Utiles
     function calcularDetalle(doc) {
       const adultos = Number(doc.adultos ?? doc.adults ?? 0);
-      const ninos = Number(doc.ninos ?? doc.children ?? doc.kids ?? 0);
+      const ninos = Number(doc.ninos ?? doc.children ?? 0);
       return { adultos, ninos, total: adultos + ninos };
     }
-
-    // Formatear timestamp a fecha y hora en es-MX
     function formatFechaHora(timestamp) {
       if (!timestamp) return 'Sin fecha';
       try {
         const d = (timestamp.toDate) ? timestamp.toDate() : new Date(timestamp);
-        return d.toLocaleString('es-MX', {
-          year:'numeric', month:'short', day:'2-digit',
-          hour:'2-digit', minute:'2-digit'
-        });
+        return d.toLocaleString('es-MX', { year:'numeric', month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
       } catch(e) { return '—'; }
     }
 
-    // Render de la lista (clara y entendible)
-    function renderLista(items) {
+    // Render de la página actual
+    function renderPage(items) {
       const listEl = document.getElementById('confirmacionesList');
       const loadingEl = document.getElementById('loading');
-
       listEl.innerHTML = '';
+
       if (!items.length) {
         loadingEl.style.display = 'none';
         const empty = document.createElement('div');
         empty.className = 'empty';
-        empty.textContent = 'No hay confirmaciones aún.';
+        empty.textContent = 'No hay confirmaciones en esta página.';
         listEl.appendChild(empty);
-        document.getElementById('totalConfirmaciones').textContent = '0';
-        document.getElementById('totalPersonas').textContent = '0';
-        document.getElementById('totalAdultos').textContent = '0';
-        document.getElementById('totalNinos').textContent = '0';
+        updateStats([], null);
         return;
       }
-
       loadingEl.style.display = 'none';
 
-      let totalConfirm = 0;
-      let totalPersonas = 0;
-      let totalAdultos = 0;
-      let totalNinos = 0;
-      let lastTimestamp = null;
+      // stats locales
+      updateStats(items);
 
-      items.forEach((d) => {
-        totalConfirm++;
+      items.forEach(d => {
         const det = calcularDetalle(d);
-        totalPersonas += det.total;
-        totalAdultos += det.adultos;
-        totalNinos += det.ninos;
-
-        // track last update timestamp
-        if (d.timestamp && d.timestamp.toDate) {
-          const t = d.timestamp.toDate();
-          if (!lastTimestamp || t > lastTimestamp) lastTimestamp = t;
-        }
-
-        // Construir item
         const item = document.createElement('div');
         item.className = 'confirm-item';
         item.setAttribute('role','listitem');
@@ -396,107 +189,176 @@
 
         const info = document.createElement('div');
         info.className = 'info';
-
         const name = document.createElement('div');
         name.className = 'name';
         name.textContent = d.nombre || 'Sin nombre';
-
         const meta = document.createElement('div');
         meta.className = 'meta';
         meta.innerHTML = `Adultos: <strong>${det.adultos}</strong> &nbsp; • &nbsp; Niños: <strong>${det.ninos}</strong><br>
                           <span style="color:var(--color-texto-claro)">${formatFechaHora(d.timestamp)}</span>`;
-
         const right = document.createElement('div');
         right.className = 'right';
-        right.innerHTML = `<div class="people">${det.total}</div>
-                           <div style="font-size:12px;color:var(--color-texto-claro)">Total</div>`;
+        right.innerHTML = `<div class="people">${det.total}</div><div style="font-size:12px;color:var(--color-texto-claro)">Total</div>`;
 
         info.appendChild(name);
         info.appendChild(meta);
-
         item.appendChild(avatar);
         item.appendChild(info);
         item.appendChild(right);
-
         listEl.appendChild(item);
+      });
+    }
+
+    // Actualiza estadísticas globales de la página (y última actualización)
+    function updateStats(pageItems = [], lastTimestamp = null) {
+      // Calcula solo con los items de la página actual
+      let totalConfirm = pageItems.length;
+      let totalPersonas = 0, totalAdultos = 0, totalNinos = 0;
+      let latest = lastTimestamp;
+
+      pageItems.forEach(d => {
+        const det = calcularDetalle(d);
+        totalPersonas += det.total;
+        totalAdultos += det.adultos;
+        totalNinos += det.ninos;
+        if (d.timestamp && d.timestamp.toDate) {
+          const t = d.timestamp.toDate();
+          if (!latest || t > latest) latest = t;
+        }
       });
 
       document.getElementById('totalConfirmaciones').textContent = totalConfirm;
       document.getElementById('totalPersonas').textContent = totalPersonas;
       document.getElementById('totalAdultos').textContent = totalAdultos;
       document.getElementById('totalNinos').textContent = totalNinos;
-      document.getElementById('lastUpdate').textContent = lastTimestamp ? lastTimestamp.toLocaleString('es-MX', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
+      document.getElementById('lastUpdate').textContent = latest ? latest.toLocaleString('es-MX', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
     }
 
-    // Cargar confirmaciones en tiempo real
-    function cargarConfirmaciones() {
-      const loadingEl = document.getElementById('loading');
-      loadingEl.style.display = 'block';
-      if (unsubscribe) unsubscribe();
-
-      unsubscribe = db.collection('confirmaciones')
-        .orderBy('timestamp','desc')
-        .onSnapshot(snapshot => {
-          datosOriginales = snapshot.docs.map(doc => doc.data());
-          renderLista(datosOriginales);
-        }, err => {
-          loadingEl.textContent = 'Error al cargar datos: ' + (err.message || err);
-        });
+    // Consultas paginadas
+    async function loadFirstPage() {
+      currentPage = 1;
+      document.getElementById('pageNumber').textContent = currentPage;
+      const q = db.collection('confirmaciones').orderBy('timestamp','desc').limit(pageSize);
+      const snap = await q.get();
+      const docs = snap.docs.map(d => d.data());
+      firstDoc = snap.docs[0] || null;
+      lastDoc = snap.docs[snap.docs.length - 1] || null;
+      currentItems = docs;
+      renderPage(docs);
+      updatePaginationButtons(snap.docs.length === pageSize, false);
     }
 
-    // Buscador, export y controles
+    async function loadNextPage() {
+      if (!lastDoc) return;
+      const q = db.collection('confirmaciones').orderBy('timestamp','desc').startAfter(lastDoc).limit(pageSize);
+      const snap = await q.get();
+      const docs = snap.docs.map(d => d.data());
+      if (!docs.length) return; // no hay más
+      firstDoc = snap.docs[0] || null;
+      lastDoc = snap.docs[snap.docs.length - 1] || null;
+      currentPage++;
+      document.getElementById('pageNumber').textContent = currentPage;
+      currentItems = docs;
+      renderPage(docs);
+      updatePaginationButtons(snap.docs.length === pageSize, true);
+    }
+
+    async function loadPrevPage() {
+      if (!firstDoc) return;
+      // endBefore + limitToLast para página anterior
+      const q = db.collection('confirmaciones').orderBy('timestamp','desc').endBefore(firstDoc).limitToLast(pageSize);
+      const snap = await q.get();
+      const docs = snap.docs.map(d => d.data());
+      if (!docs.length) return; // ya en inicio
+      firstDoc = snap.docs[0] || null;
+      lastDoc = snap.docs[snap.docs.length - 1] || null;
+      currentPage = Math.max(1, currentPage - 1);
+      document.getElementById('pageNumber').textContent = currentPage;
+      currentItems = docs;
+      renderPage(docs);
+      // habilita/deshabilita botones según tamaño
+      updatePaginationButtons(true, true);
+      // Si ahora estamos en la primera página, desactivar prev:
+      if (!firstDoc) document.getElementById('prevPage').disabled = true;
+    }
+
+    function updatePaginationButtons(hasNext, hasPrev) {
+      document.getElementById('nextPage').disabled = !hasNext;
+      document.getElementById('prevPage').disabled = !hasPrev && currentPage === 1;
+    }
+
+    // Export CSV: exporta TODOS los registros (consulta completa)
+    async function exportAllCSV() {
+      const snap = await db.collection('confirmaciones').orderBy('timestamp','desc').get();
+      const rows = snap.docs.map(d => {
+        const data = d.data();
+        const det = calcularDetalle(data);
+        const nombre = `"${(data.nombre || '').replace(/"/g,'""')}"`;
+        const fecha = formatFechaHora(data.timestamp).replace(/"/g,'""');
+        return [nombre, det.adultos, det.ninos, det.total, `"${fecha}"`].join(',');
+      });
+      const header = ['Nombre','Adultos','Niños','Total','FechaHora'];
+      const csv = [header.join(','), ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'confirmaciones_todas.csv'; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Búsqueda local: por simplicidad busca en la página actual (si quieres búsqueda global, hay que consultar todo)
+    function searchInCurrentPage(q) {
+      if (!q) { renderPage(currentItems); return; }
+      const filtered = currentItems.filter(d => (d.nombre || '').toLowerCase().includes(q));
+      renderPage(filtered);
+    }
+
+    // Eventos y arranque
     document.addEventListener('DOMContentLoaded', () => {
-      const input = document.getElementById('searchInput');
-      input.addEventListener('input', (e) => {
-        const q = e.target.value.trim().toLowerCase();
-        if (!q) { renderLista(datosOriginales); return; }
-        const filtrados = datosOriginales.filter(d => (d.nombre || '').toLowerCase().includes(q));
-        renderLista(filtrados);
+      // controles
+      document.getElementById('nextPage').addEventListener('click', async () => {
+        // deshabilita botón mientras carga
+        document.getElementById('nextPage').disabled = true;
+        await loadNextPage();
       });
-
-      // Export CSV (incluye adultos/niños/total)
-      document.getElementById('exportCsvBtn').addEventListener('click', () => {
-        if (!datosOriginales.length) return alert('No hay datos para exportar.');
-        const header = ['Nombre','Adultos','Niños','Total','FechaHora'];
-        const rows = datosOriginales.map(d => {
-          const det = calcularDetalle(d);
-          const nombre = `"${(d.nombre || '').replace(/"/g,'""')}"`;
-          const fecha = formatFechaHora(d.timestamp).replace(/"/g,'""');
-          return [nombre, det.adultos, det.ninos, det.total, `"${fecha}"`].join(',');
-        });
-        const csv = [header.join(','), ...rows].join('\n');
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'confirmaciones.csv';
-        a.click();
-        URL.revokeObjectURL(url);
+      document.getElementById('prevPage').addEventListener('click', async () => {
+        document.getElementById('prevPage').disabled = true;
+        await loadPrevPage();
       });
-
-      // Refresh button
       document.getElementById('refreshBtn').addEventListener('click', () => {
-        cargarConfirmaciones();
+        // recarga la página actual: si currentPage==1 llama loadFirstPage, else intenta reloadRelative
+        if (currentPage === 1) loadFirstPage();
+        else {
+          // simple: volver a la primera y luego avanzar (coste pequeño). Alternativa: almacenar stack de cursors.
+          // Aquí hago método simple: volver a la primera y avanzar (asegura consistencia).
+          (async () => {
+            await loadFirstPage();
+            for (let i = 1; i < currentPage; i++) {
+              await loadNextPage();
+            }
+          })();
+        }
       });
-
-      // Theme toggle
-      const toggle = document.getElementById('toggleTheme');
-      toggle.addEventListener('click', () => {
-        document.body.classList.toggle('light');
+      document.getElementById('exportCsvBtn').addEventListener('click', exportAllCSV);
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        const q = e.target.value.trim().toLowerCase();
+        searchInCurrentPage(q);
       });
+      document.getElementById('toggleTheme').addEventListener('click', () => document.body.classList.toggle('light'));
 
-      // footer fecha publicación (muestra fecha/hora actual al cargar)
+      // footer fecha publicación
       const fechaEl = document.getElementById('fechaPublicacion');
-      const now = new Date();
-      fechaEl.textContent = now.toLocaleString('es-MX', { year:'numeric', month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+      fechaEl.textContent = new Date().toLocaleString('es-MX', { year:'numeric', month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
 
-      // arrancar
-      cargarConfirmaciones();
+      // cargar primera página
+      loadFirstPage().catch(err => {
+        document.getElementById('loading').textContent = 'Error al cargar datos: ' + (err.message || err);
+      });
     });
 
-    // Por seguridad: limpiar listener on unload
+    // cleanup
     window.addEventListener('beforeunload', () => {
-      if (unsubscribe) unsubscribe();
+      // no hay listeners persistentes en esta implementación paginada
     });
   </script>
 </body>
