@@ -5,266 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Confirmaciones de Asistencia — Julianchis y Elías FEST</title>
 
-  <!-- Fonts (mismo set que invitación) -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --color-primario: #000000;       /* negro Batman */
-      --color-secundario: #ffce00;     /* amarillo dorado */
-      --color-terciario: #1a1a1a;      /* gris oscuro */
-      --color-fondo: #0d0d0d;          /* fondo casi negro */
-      --color-texto: #f1f1f1;
-      --color-texto-claro: #c9c9c9;
-      --color-borde: #2a2a2a;
-      --color-sombra: rgba(255,206,0,0.12);
-      --color-boton: #ffce00;
-      --color-boton-hover: #e0b800;
-
-      --card-bg: #0d0d0d;
-      --muted-bg: #111;
+      --color-primario:#000;
+      --color-secundario:#ffce00;
+      --color-terciario:#1a1a1a;
+      --color-fondo:#0d0d0d;
+      --color-texto:#f1f1f1;
+      --color-texto-claro:#c9c9c9;
+      --color-borde:#2a2a2a;
+      --color-sombra:rgba(255,206,0,0.12);
+      --color-boton:#ffce00;
+      --color-boton-hover:#e0b800;
+      --card-bg:#0d0d0d;
     }
 
-    /* Light variant for users who toggle */
-    body.light {
-      --color-fondo: #f7f7f7;
-      --color-texto: #111;
-      --card-bg: #ffffff;
-      --muted-bg: #fbfbfb;
-      --color-borde: #e6e6e6;
-      --color-sombra: rgba(0,0,0,0.06);
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(circle at top left, #1a1a1a 0%, #000 100%);
-      color:var(--color-texto);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      min-height:100vh;
-      padding-bottom:40px;
-    }
-
-    body.light {
-      background: #f3f3f3;
-      color: var(--color-texto);
-    }
-
-    .container {
-      max-width:1000px;
-      margin:22px auto;
-      padding:18px;
-    }
-
-    header.app-header{
-      display:flex;
-      gap:16px;
-      align-items:center;
-      margin-bottom:18px;
-    }
-
-    .logo-img{
-      width:72px;
-      height:72px;
-      object-fit:cover;
-      border-radius:10px;
-      border:2px solid var(--color-secundario);
-      box-shadow:0 6px 18px var(--color-sombra);
-    }
-
-    h1 {
-      font-size:20px;
-      margin:0;
-      color:var(--color-secundario);
-      font-weight:600;
-    }
-
-    .controls {
-      display:flex;
-      gap:10px;
-      margin:14px 0;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    .search {
-      flex:1;
-      min-width:180px;
-      background:var(--card-bg);
-      border:1px solid var(--color-borde);
-      padding:10px 12px;
-      border-radius:12px;
-      color:var(--color-texto);
-    }
-
-    .btn {
-      background:var(--color-boton);
-      color:#000;
-      border:none;
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:600;
-      cursor:pointer;
-      box-shadow:0 6px 14px var(--color-sombra);
-      text-transform:uppercase;
-      letter-spacing:0.6px;
-    }
-    .btn:hover{ background:var(--color-boton-hover); transform:scale(1.02) }
-
-    .stats {
-      display:flex;
-      gap:12px;
-      margin-bottom:14px;
-      flex-wrap:wrap;
-    }
-
-    .stat-card {
-      background:var(--card-bg);
-      border-radius:12px;
-      padding:14px;
-      box-shadow:0 6px 18px var(--color-sombra);
-      border:1px solid var(--color-borde);
-      min-width:160px;
-      flex:1;
-    }
-    .stat-title { font-size:13px; color:var(--color-texto-claro); margin:0 0 6px 0; }
-    .stat-value { font-size:20px; color:var(--color-secundario); font-weight:700; }
-
-    .list-card {
-      background:var(--card-bg);
-      border-radius:12px;
-      overflow:hidden;
-      border:1px solid var(--color-borde);
-      box-shadow:0 6px 18px var(--color-sombra);
-    }
-
-    .list-header {
-      background: linear-gradient(90deg, rgba(0,0,0,0.45), rgba(26,26,26,0.6));
-      color: var(--color-secundario);
-      padding:12px 16px;
-      font-weight:700;
-      letter-spacing:0.6px;
-    }
-
-    #confirmacionesList {
-      padding:12px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      max-height:60vh;
-      overflow:auto;
-    }
-
-    .confirm-item {
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:12px;
-      border-radius:10px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
-      border:1px solid transparent;
-    }
-
-    .avatar {
-      width:56px;
-      height:56px;
-      border-radius:10px;
-      background:linear-gradient(180deg,#111,#0d0d0d);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      color:var(--color-secundario);
-      border:2px solid rgba(255,206,0,0.12);
-      flex-shrink:0;
-    }
-
-    .info {
-      flex:1;
-      min-width:0;
-    }
-
-    .name {
-      font-size:16px;
-      font-weight:600;
-      color:var(--color-texto);
-      margin-bottom:4px;
-    }
-
-    .meta {
-      font-size:13px;
-      color:var(--color-texto-claro);
-      line-height:1.2;
-    }
-
-    .right {
-      text-align:right;
-      min-width:120px;
-    }
-
-    .right .people {
-      font-weight:700;
-      color:var(--color-secundario);
-      font-size:16px;
-    }
-
-    .empty {
-      padding:20px;
-      text-align:center;
-      color:var(--color-texto-claro);
-      font-style:italic;
-    }
-
-    .loading {
-      padding:18px;
-      text-align:center;
-      color:var(--color-texto-claro);
-      font-style:italic;
-    }
-
-    .toggle-dark {
-      background:transparent;
-      border:1px solid var(--color-borde);
-      color:var(--color-texto);
-      padding:8px 10px;
-      border-radius:10px;
-      cursor:pointer;
-    }
-
-    footer {
-      text-align:center;
-      margin-top:18px;
-      color:var(--color-texto-claro);
-      font-size:13px;
-    }
-
-    /* responsive */
-    @media (max-width:640px) {
-      .right { min-width:90px; font-size:13px }
-      .avatar { width:48px; height:48px }
-    }
+    body{margin:0;font-family:'Montserrat',sans-serif;background:radial-gradient(circle at top left,#1a1a1a 0%,#000 100%);color:var(--color-texto);}
+    .container{max-width:1000px;margin:22px auto;padding:18px;}
+    h1{color:var(--color-secundario);font-size:20px;margin:0 0 12px 0;text-align:center;}
+    .stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+    .stat-card{background:var(--card-bg);border:1px solid var(--color-borde);border-radius:12px;padding:14px;flex:1;min-width:160px;box-shadow:0 6px 18px var(--color-sombra);}
+    .stat-title{font-size:13px;color:var(--color-texto-claro);}
+    .stat-value{font-size:20px;color:var(--color-secundario);font-weight:700;}
+    .list-card{background:var(--card-bg);border-radius:12px;overflow:hidden;border:1px solid var(--color-borde);}
+    .list-header{background:linear-gradient(90deg,#000 0%,#1a1a1a 100%);color:var(--color-secundario);padding:12px 16px;font-weight:700;}
+    #confirmacionesList{padding:12px;display:flex;flex-direction:column;gap:10px;max-height:60vh;overflow:auto;}
+    .confirm-item{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;border:1px solid #222;}
+    .avatar{width:56px;height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#111;color:var(--color-secundario);font-weight:700;}
+    .info{flex:1;}
+    .name{font-weight:600;font-size:16px;}
+    .meta{font-size:13px;color:var(--color-texto-claro);}
+    .right{text-align:right;}
+    footer{text-align:center;color:var(--color-texto-claro);font-size:13px;margin-top:16px;}
   </style>
 </head>
 <body>
   <div class="container">
-    <header class="app-header" role="banner">
-      <img class="logo-img" src="https://i.ibb.co/wFVHyPtL/04476d50-b059-4919-b8dc-81ac6d097f40.jpg" alt="Logo evento" />
-      <div>
-        <h1>Confirmaciones — Julianchis y Elías FEST</h1>
-        <div style="font-size:13px;color:var(--color-texto-claro)">Panel en tiempo real — Actualiza según confirmaciones</div>
-      </div>
-      <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
-        <button class="toggle-dark" id="toggleTheme" title="Cambiar tema">🌗</button>
-      </div>
-    </header>
-
-    <section class="controls" aria-label="Controles">
-      <input id="searchInput" class="search" type="text" placeholder="Buscar por nombre..." aria-label="Buscar por nombre" />
-      <button class="btn" id="exportCsvBtn">Exportar CSV</button>
-      <button class="btn" id="refreshBtn" style="background:transparent;color:var(--color-texto);border:1px solid var(--color-borde);box-shadow:none">Actualizar</button>
-    </section>
+    <h1>Confirmaciones — Julianchis y Elías FEST</h1>
 
     <section class="stats">
       <div class="stat-card">
@@ -272,220 +51,83 @@
         <div class="stat-value" id="totalConfirmaciones">0</div>
       </div>
       <div class="stat-card">
+        <div class="stat-title">Adultos Totales</div>
+        <div class="stat-value" id="totalAdultos">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-title">Niños Totales</div>
+        <div class="stat-value" id="totalNinos">0</div>
+      </div>
+      <div class="stat-card">
         <div class="stat-title">Total Personas</div>
         <div class="stat-value" id="totalPersonas">0</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-title">Última actualización</div>
-        <div class="stat-value" id="lastUpdate">—</div>
-      </div>
     </section>
 
-    <section class="list-card" aria-labelledby="listTitle">
-      <div class="list-header" id="listTitle">Lista de Confirmaciones</div>
-
-      <div id="confirmationsArea">
-        <div id="loading" class="loading">Cargando datos...</div>
-        <div id="confirmacionesList" aria-live="polite" role="list"></div>
-      </div>
+    <section class="list-card">
+      <div class="list-header">Lista de Confirmaciones</div>
+      <div id="confirmacionesList"></div>
     </section>
 
-    <footer>
-      Versión <strong>1.0.10</strong> — <time id="fechaPublicacion"></time>
-    </footer>
+    <footer>Versión <strong>1.0.10</strong> — <time id="fechaPublicacion"></time></footer>
   </div>
 
-  <!-- Firebase compat (igual que en la invitación) -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
   <script>
-    // Configuración firebase (usa la tuya)
     const firebaseConfig = {
-      apiKey: "AIzaSyAG1fFh_ZwN4hSYe-1v-yxqsW4WWjyjkl4",
-      authDomain: "confirmaciones-jimena.firebaseapp.com",
-      projectId: "confirmaciones-jimena",
+      apiKey:"AIzaSyAG1fFh_ZwN4hSYe-1v-yxqsW4WWjyjkl4",
+      authDomain:"confirmaciones-jimena.firebaseapp.com",
+      projectId:"confirmaciones-jimena"
     };
     firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    const db=firebase.firestore();
 
-    // Estado local
-    let datosOriginales = [];
-    let unsubscribe = null;
-
-    // Util: calcular total de personas por registro
-    function calcularPersonas(doc) {
-      // compatibilidad: usar 'personas' si existe; sino sumar 'adultos' + 'ninos'
-      if (typeof doc.personas === 'number') return doc.personas;
-      const adultos = Number(doc.adultos || doc.adults || 0);
-      const ninos = Number(doc.ninos || doc.children || doc.kids || 0);
-      return adultos + ninos;
+    function calcularPersonas(d){
+      const adultos=Number(d.adultos||0);
+      const ninos=Number(d.ninos||0);
+      return {adultos,ninos,total:adultos+ninos};
     }
 
-    // Formatear timestamp a fecha y hora en es-MX
-    function formatFechaHora(timestamp) {
-      if (!timestamp) return 'Sin fecha';
-      try {
-        const d = (timestamp.toDate) ? timestamp.toDate() : new Date(timestamp);
-        return d.toLocaleString('es-MX', {
-          year:'numeric', month:'short', day:'2-digit',
-          hour:'2-digit', minute:'2-digit'
-        });
-      } catch(e) { return '—'; }
+    function formatFecha(ts){
+      if(!ts)return'—';
+      const d=ts.toDate?ts.toDate():new Date(ts);
+      return d.toLocaleString('es-MX',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
     }
 
-    // Render de la lista (clara y entendible)
-    function renderLista(items) {
-      const listEl = document.getElementById('confirmacionesList');
-      const loadingEl = document.getElementById('loading');
-
-      listEl.innerHTML = '';
-      if (!items.length) {
-        loadingEl.style.display = 'none';
-        const empty = document.createElement('div');
-        empty.className = 'empty';
-        empty.textContent = 'No hay confirmaciones aún.';
-        listEl.appendChild(empty);
-        document.getElementById('totalConfirmaciones').textContent = '0';
-        document.getElementById('totalPersonas').textContent = '0';
-        return;
-      }
-
-      loadingEl.style.display = 'none';
-
-      let totalConfirm = 0;
-      let totalPersonas = 0;
-      let lastTimestamp = null;
-
-      items.forEach((d, idx) => {
-        totalConfirm++;
-        const personas = calcularPersonas(d);
-        totalPersonas += personas;
-
-        // track last update timestamp
-        if (d.timestamp && d.timestamp.toDate) {
-          const t = d.timestamp.toDate();
-          if (!lastTimestamp || t > lastTimestamp) lastTimestamp = t;
-        }
-
-        // Construir item
-        const item = document.createElement('div');
-        item.className = 'confirm-item';
-        item.setAttribute('role','listitem');
-
-        const avatar = document.createElement('div');
-        avatar.className = 'avatar';
-        // initials from name
-        const initials = (d.nombre || 'U').split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase();
-        avatar.textContent = initials;
-
-        const info = document.createElement('div');
-        info.className = 'info';
-
-        const name = document.createElement('div');
-        name.className = 'name';
-        name.textContent = d.nombre || 'Sin nombre';
-
-        const meta = document.createElement('div');
-        meta.className = 'meta';
-        const adultos = d.adultos ?? d.adults ?? 0;
-        const ninos = d.ninos ?? d.children ?? 0;
-        meta.innerHTML = `Adultos: <strong>${adultos}</strong> &nbsp; • &nbsp; Niños: <strong>${ninos}</strong><br>
-                          <span style="color:var(--color-texto-claro)">${formatFechaHora(d.timestamp)}</span>`;
-
-        const right = document.createElement('div');
-        right.className = 'right';
-        right.innerHTML = `<div class="people">${personas}</div>
-                           <div style="font-size:12px;color:var(--color-texto-claro)">Total</div>`;
-
-        info.appendChild(name);
-        info.appendChild(meta);
-
-        item.appendChild(avatar);
-        item.appendChild(info);
-        item.appendChild(right);
-
-        listEl.appendChild(item);
+    function renderLista(data){
+      const list=document.getElementById("confirmacionesList");
+      list.innerHTML='';
+      let totalConfirm=0,totalPersonas=0,totalAdultos=0,totalNinos=0;
+      data.forEach(d=>{
+        const {adultos,ninos,total}=calcularPersonas(d);
+        totalConfirm++;totalAdultos+=adultos;totalNinos+=ninos;totalPersonas+=total;
+        const div=document.createElement('div');
+        div.className='confirm-item';
+        div.innerHTML=`
+          <div class="avatar">${(d.nombre||'?').charAt(0).toUpperCase()}</div>
+          <div class="info">
+            <div class="name">${d.nombre||'Sin nombre'}</div>
+            <div class="meta">Adultos: <b>${adultos}</b> • Niños: <b>${ninos}</b><br>${formatFecha(d.timestamp)}</div>
+          </div>
+          <div class="right"><div><b>${total}</b></div><div style="font-size:12px;color:var(--color-texto-claro)">Total</div></div>`;
+        list.appendChild(div);
       });
-
-      document.getElementById('totalConfirmaciones').textContent = totalConfirm;
-      document.getElementById('totalPersonas').textContent = totalPersonas;
-      document.getElementById('lastUpdate').textContent = lastTimestamp ? lastTimestamp.toLocaleString('es-MX', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
+      document.getElementById("totalConfirmaciones").textContent=totalConfirm;
+      document.getElementById("totalAdultos").textContent=totalAdultos;
+      document.getElementById("totalNinos").textContent=totalNinos;
+      document.getElementById("totalPersonas").textContent=totalPersonas;
     }
 
-    // Cargar confirmaciones en tiempo real
-    function cargarConfirmaciones() {
-      const loadingEl = document.getElementById('loading');
-      loadingEl.style.display = 'block';
-      if (unsubscribe) unsubscribe();
-
-      unsubscribe = db.collection('confirmaciones')
-        .orderBy('timestamp','desc')
-        .onSnapshot(snapshot => {
-          datosOriginales = snapshot.docs.map(doc => doc.data());
-          renderLista(datosOriginales);
-        }, err => {
-          loadingEl.textContent = 'Error al cargar datos: ' + (err.message || err);
-        });
-    }
-
-    // Buscador
-    document.addEventListener('DOMContentLoaded', () => {
-      const input = document.getElementById('searchInput');
-      input.addEventListener('input', (e) => {
-        const q = e.target.value.trim().toLowerCase();
-        if (!q) { renderLista(datosOriginales); return; }
-        const filtrados = datosOriginales.filter(d => (d.nombre || '').toLowerCase().includes(q));
-        renderLista(filtrados);
-      });
-
-      // Export CSV
-      document.getElementById('exportCsvBtn').addEventListener('click', () => {
-        if (!datosOriginales.length) return alert('No hay datos para exportar.');
-        const header = ['Nombre','Adultos','Niños','Total','FechaHora'];
-        const rows = datosOriginales.map(d => {
-          const adultos = d.adultos ?? d.adults ?? 0;
-          const ninos = d.ninos ?? d.children ?? 0;
-          const total = calcularPersonas(d);
-          const fecha = formatFechaHora(d.timestamp);
-          // escapamos comas simples
-          const nombre = `"${(d.nombre || '').replace(/"/g,'""')}"`;
-          return [nombre, adultos, ninos, total, `"${fecha}"`].join(',');
-        });
-        const csv = [header.join(','), ...rows].join('\n');
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'confirmaciones.csv';
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-
-      // Refresh button
-      document.getElementById('refreshBtn').addEventListener('click', () => {
-        cargarConfirmaciones();
-      });
-
-      // Theme toggle
-      const toggle = document.getElementById('toggleTheme');
-      toggle.addEventListener('click', () => {
-        document.body.classList.toggle('light');
-      });
-
-      // footer fecha publicación (muestra fecha/hora actual al cargar)
-      const fechaEl = document.getElementById('fechaPublicacion');
-      const now = new Date();
-      fechaEl.textContent = now.toLocaleString('es-MX', { year:'numeric', month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
-
-      // arrancar
-      cargarConfirmaciones();
+    db.collection("confirmaciones").orderBy("timestamp","desc").onSnapshot(s=>{
+      const docs=s.docs.map(d=>d.data());
+      renderLista(docs);
     });
 
-    // Por seguridad: limpiar listener on unload
-    window.addEventListener('beforeunload', () => {
-      if (unsubscribe) unsubscribe();
-    });
+    // footer con fecha
+    document.getElementById('fechaPublicacion').textContent=new Date().toLocaleString('es-MX',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
   </script>
 </body>
 </html>
